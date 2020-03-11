@@ -1,0 +1,134 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.wolkowiczmateusz.biometricjetpack"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
+        }
+        release {
+            buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android
+    implementation "androidx.appcompat:appcompat:$app_compat"
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidx_lifecycle_version"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$androidx_nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$androidx_nav_version"
+    testImplementation "android.arch.navigation:navigation-testing-ktx:$navigation_testing"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
+
+    // Reactive extensions
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_java_android"
+
+    // Network
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit") {
+        exclude group: "com.squareup.okhttp3"
+    }
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi"
+    implementation "com.github.pwittchen:reactivenetwork-rx2:$reactive_network"
+
+    // Persistence
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+
+    // Support
+    implementation "com.jakewharton.timber:timber:$timber"
+
+    // Permissions
+    implementation "com.karumi:dexter:$dexter"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+
+    // BIOMETRIC
+    implementation "androidx.biometric:biometric:$androidx_biometric"
+
+    // Tests
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test:runner:$test_runner"
+    testImplementation "androidx.test:runner:$test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+    testImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit"
+    androidTestImplementation "androidx.test:rules:$test_rules"
+    testImplementation "androidx.test:rules:$test_rules"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "com.google.truth:truth:$truth"
+    testImplementation "android.arch.core:core-testing:$core_testing_version"
+    testImplementation "androidx.test:core:$androidx_test_core_version"
+    androidTestImplementation "androidx.test:core:$androidx_test_core_version"
+    testImplementation "androidx.test.ext:truth:$ext_truth"
+    testImplementation "androidx.test.ext:junit:$ext_junit"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.robolectric:robolectric:$robolectric"
+    testImplementation "com.jraska.livedata:testing-ktx:$livedata_testing"
+}
